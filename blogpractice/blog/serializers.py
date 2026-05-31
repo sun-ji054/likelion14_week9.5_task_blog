@@ -12,8 +12,6 @@ class CommentSerializer(serializers.ModelSerializer):
 
 # - blogs/ 에서의 블로그 글 목록 조회 (GET)
 class BlogListSerializer(serializers.ModelSerializer):
-    user = CustomUserSerializer(read_only=True)
-
     class Meta:
         model = Blog
         fields = ["id", "title", "body", "created_at"]
