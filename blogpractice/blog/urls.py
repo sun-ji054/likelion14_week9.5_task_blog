@@ -4,6 +4,7 @@ from . import views
 app_name = 'blog'
 
 urlpatterns = [
-    path("", views.blog_list, name="blog_list"),
-    path("<int:pk>", views.blog_detail, name="blog_detail")
+    path("", views.BlogListAPIView.as_view(), name="blog_list"),
+    path("<int:pk>", views.BlogDetailAPIView.as_view(), name="blog_detail"),
+    path("<int:pk>/comments/", views.CommentListAPIView.as_view(), name="comment_list"),
 ]
