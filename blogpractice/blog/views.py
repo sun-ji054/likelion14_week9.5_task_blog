@@ -33,7 +33,7 @@ class BlogDetailAPIView(APIView):
 
     def patch(self, request, pk):
         blog = get_object_or_404(Blog, id=pk)
-        serializer = BlogDetailSerializer(blog, data=request.data, partial=True)
+        serializer = BlogListSerializer(blog, data=request.data, partial=True)
 
         if serializer.is_valid():
             serializer.save()
@@ -66,4 +66,4 @@ class CommentListAPIView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
+        

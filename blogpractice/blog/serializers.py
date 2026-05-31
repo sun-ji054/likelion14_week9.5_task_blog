@@ -1,10 +1,11 @@
 from rest_framework import serializers
-
-from accounts.serializers import CustomUserSerializer
 from blog.models import Blog, Comment
+# from accounts.serializers import CustomUserSerializer
 
 class CommentSerializer(serializers.ModelSerializer):
     blog_id = serializers.IntegerField(source = "blog.id", read_only = True)
+    # blog_id: 응답에서 보여줄 이름, source: 데이터 어디서 가져올지 경로
+    created_at = serializers.DateTimeField(format="%Y-%m-%d", read_only=True)
 
     class Meta:
         model = Comment
@@ -12,6 +13,8 @@ class CommentSerializer(serializers.ModelSerializer):
 
 # - blogs/ 에서의 블로그 글 목록 조회 (GET)
 class BlogListSerializer(serializers.ModelSerializer):
+    created_at = serializers.DateTimeField(format="%Y-%m-%d", read_only=True)
+
     class Meta:
         model = Blog
         fields = ["id", "title", "body", "created_at"]
@@ -20,7 +23,8 @@ class BlogListSerializer(serializers.ModelSerializer):
 # - blogs/ 에서의 블로그 글 쓰기 (POST)
 # - blogs/{int:pk} 에서의 GET, PUT
 class BlogDetailSerializer(serializers.ModelSerializer):
-    comment = CommentSerializer(many = True, read_only = True)
+    comments = CommentSerializer(many = True, read_only = True)
+    created_at = serializers.DateTimeField(format="%Y-%m-%d", read_only=True)
 
     class Meta:
         model = Blog
