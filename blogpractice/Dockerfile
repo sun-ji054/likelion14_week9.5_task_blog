@@ -1,5 +1,4 @@
-FROM python:3.14.3 // python --version으로 프로젝트 파이썬 버전 확인 후 수정 요
-
+FROM python:3.14.3
 ENV PYTHONUNBUFFERED=1
 
 WORKDIR /app
